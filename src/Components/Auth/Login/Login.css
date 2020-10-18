@@ -1,16 +1,16 @@
-.signup{
+.login{
     height: 100vh;
     display: grid;
     place-items: center;
 }
 
-.signup-form{
+.login-form{
     display: flex;
     flex-direction: column;
     width: 300px;
 }
 
-.signup-form input{
+.login-form input{
     margin-bottom: 20px;
     outline-width: 0;
     border: 1px solid lightgray;
@@ -18,12 +18,12 @@
     font-size: 16px;
 }
 
-.signup-form button{
+.login-form button{
     outline-width: 0;
     border: none;
     color: #146396;
 }
 
-.signup-form .dont{
+.login-form .dont{
     margin-top: 30px;
 }

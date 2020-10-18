@@ -5,6 +5,7 @@ import Home from "./Components/Home/Home";
 import {auth} from "./firebase";
 import {useStateValue} from "./StateProvider";
 import SignUp from "./Components/Auth/SignUp/SignUp";
+import Login from "./Components/Auth/Login/Login";
 
 function App() {
 
@@ -25,7 +26,7 @@ function App() {
         })
       }
     })
-  })
+  },[dispatch])
 
   return (
       <div className="app">
@@ -33,6 +34,9 @@ function App() {
           <Switch>
             <Route path={'/signup'}>
               <SignUp />
+            </Route>
+            <Route path={'/login'}>
+              <Login/>
             </Route>
             <Route path={'/'}>
               <Home />
