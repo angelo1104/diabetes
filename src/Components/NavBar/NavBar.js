@@ -1,8 +1,14 @@
-import React from "react";
+import React, {useEffect} from "react";
 import './NavBar.css';
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 
 function NavBar() {
+    const location = useLocation();
+
+    useEffect(()=>{
+        console.log(location.pathname)
+    },[location.pathname])
+
     return (
         <header className="navbar">
             <div className="navbar-link">
@@ -21,7 +27,7 @@ function NavBar() {
                 </a>
             </div>
 
-            <div className="navbar-auth">
+            {location.pathname!=='/dashboard' && <div className="navbar-auth">
                 <div className="navbar-link">
                     <Link to={'/login'}>
                         Login
@@ -32,7 +38,15 @@ function NavBar() {
                         Sign Up
                     </Link>
                 </div>
-            </div>
+            </div>}
+
+            {
+                location.pathname === '/dashboard' &&  <div className="navbar-link signup-button">
+                    <Link to={'/signup'}>
+                        Sign Out
+                    </Link>
+                </div>
+            }
         </header>
     )
 }

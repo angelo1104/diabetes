@@ -1,12 +1,20 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import './Login.css';
 import {Button} from "@material-ui/core";
 import {auth} from "../../../firebase";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
+import {useStateValue} from "../../../StateProvider";
 
 function Login() {
+    const history = useHistory()
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
+
+    const [{user}] = useStateValue();
+
+    useEffect(()=>{
+        if (user) history.replace('/dashboard')
+    },[user, history])
 
     const submitLoginForm = (event)=>{
         event.preventDefault();
