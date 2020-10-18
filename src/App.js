@@ -1,25 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect} from 'react';
 import './App.css';
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import Home from "./Components/Home/Home";
+import {auth} from "./firebase";
+import {useStateValue} from "./StateProvider";
+import SignUp from "./Components/Auth/SignUp/SignUp";
 
 function App() {
+
+  //eslint-disable-next-line
+  const [state,dispatch] = useStateValue()
+
+  useEffect(()=>{
+    auth.onAuthStateChanged(authUser=>{
+      if (authUser){
+          dispatch({
+            type: "SET_USER",
+            user: authUser
+          })
+      }else {
+        dispatch({
+          type: "SET_USER",
+          user: null
+        })
+      }
+    })
+  })
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="app">
+        <Router>
+          <Switch>
+            <Route path={'/signup'}>
+              <SignUp />
+            </Route>
+            <Route path={'/'}>
+              <Home />
+            </Route>
+          </Switch>
+        </Router>
+      </div>
   );
 }
 
