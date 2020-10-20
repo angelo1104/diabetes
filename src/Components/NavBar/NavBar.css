@@ -6,8 +6,10 @@
     -moz-box-shadow: 2px -1px 15px -4px rgba(0,0,0,0.75);
     box-shadow: 2px -1px 15px -4px rgba(0,0,0,0.75);
     align-items: center;
-    position: sticky;
-    top: 0;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000;
+    background-color: white;
 }
 
 .navbar-auth{
@@ -41,4 +43,8 @@
 
 .signup-button:hover{
     text-decoration: none !important;
+}
+
+.signup-button p{
+    color: white;
 }

@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import './NavBar.css';
 import {Link, useLocation} from "react-router-dom";
+import {auth} from "../../firebase";
 
 function NavBar() {
     const location = useLocation();
@@ -9,6 +10,10 @@ function NavBar() {
         console.log(location.pathname)
     },[location.pathname])
 
+
+    const signOut = (e)=>{
+        auth.signOut();
+    }
     return (
         <header className="navbar">
             <div className="navbar-link">
@@ -42,9 +47,9 @@ function NavBar() {
 
             {
                 location.pathname === '/dashboard' &&  <div className="navbar-link signup-button">
-                    <Link to={'/signup'}>
+                    <p onClick={signOut}>
                         Sign Out
-                    </Link>
+                    </p>
                 </div>
             }
         </header>

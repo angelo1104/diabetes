@@ -17,6 +17,15 @@ function SignUp() {
         if (user) history.replace('/dashboard')
     },[user,history])
 
+    function handleEnter(event) {
+        if (event.keyCode === 13) {
+            const form = event.target.form;
+            const index = Array.prototype.indexOf.call(form, event.target);
+            form.elements[index + 1].focus();
+            event.preventDefault();
+        }
+    }
+
     const submitSignUp = (event)=>{
         event.preventDefault();
 
@@ -36,8 +45,8 @@ function SignUp() {
     return (
         <div className="signup">
             <form className={'signup-form'} onSubmit={submitSignUp}>
-                <input type="text" placeholder={'username'} value={username} onChange={e=>setUsername(e.target.value)}/>
-                <input autoComplete={'on'} type="email" placeholder={'Your email'} value={email} onChange={e=>setEmail(e.target.value)}/>
+                <input onKeyDown={handleEnter} type="text" placeholder={'username'} value={username} onChange={e=>setUsername(e.target.value)}/>
+                <input onKeyDown={handleEnter} autoComplete={'on'} type="email" placeholder={'Your email'} value={email} onChange={e=>setEmail(e.target.value)}/>
                 <input autoComplete={'on'} type="password" placeholder={'Your password'} value={password} onChange={e=>setPassword(e.target.value)}/>
                 <Button type={'submit'}>Submit</Button>
 

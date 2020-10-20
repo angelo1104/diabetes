@@ -1,0 +1,81 @@
+.dashboard-main h3{
+    text-align: center;
+    width: 60%;
+    margin: auto;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+    font-size: 40px;
+    transform: skewY(50deg) ;
+    position: relative;
+    top: 250px;
+    z-index: 2000;
+    left: 200px;
+}
+
+.dashboard-form .input p{
+    font-family: "Oswald", sans-serif;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.dashboard-form{
+    padding-left: 50px;
+}
+
+.dashboard-form input{
+    outline-width: 0;
+    border: 1px solid lightgray;
+    margin-top: 15px;
+    font-family: "Montserrat", sans-serif;
+    color: black;
+    padding: 8px 13px;
+    font-size: 18px;
+}
+
+.dashboard-form .input{
+    margin-bottom: 20px;
+}
+
+.dashboard-form span{
+    font-family: "Montserrat", sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+}
+
+.fetch-button{
+    font-size: 14px !important;
+    padding: 10px !important;
+    color: #146396 !important;
+    margin-left: 50px !important;
+}
+
+.dashboard-form{
+    margin-bottom: 30px;
+}
+
+.dialog{
+    z-index: 10000 !important;
+}
+
+.close-button-dialog{
+    font-size: 15px !important;
+    position: relative;
+    top: 20px;
+    left: 40px;
+    width: 40px;
+    height: 40px;
+}
+
+.dialog h2{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    text-align: center;
+    font-size: 40px;
+}
+
+#chart{
+    width: 700px;
+    height: 400px;
+    margin: 50px auto auto;
+    border: 1px solid lightgray;
+}

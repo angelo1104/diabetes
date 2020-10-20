@@ -16,6 +16,15 @@ function Login() {
         if (user) history.replace('/dashboard')
     },[user, history])
 
+    function handleEnter(event) {
+        if (event.keyCode === 13) {
+            const form = event.target.form;
+            const index = Array.prototype.indexOf.call(form, event.target);
+            form.elements[index + 1].focus();
+            event.preventDefault();
+        }
+    }
+
     const submitLoginForm = (event)=>{
         event.preventDefault();
 
@@ -31,7 +40,7 @@ function Login() {
     return (
         <div className="login">
            <form className="login-form" onSubmit={submitLoginForm}>
-               <input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder={'email'}/>
+               <input onKeyDown={handleEnter} type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder={'email'}/>
                <input type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder={'password'}/>
 
                <Button type={'submit'}>Submit</Button>
