@@ -1,4 +1,6 @@
-const submit = async (pregnancies,glucose,bloodPressure,skinThickness,insulin,bmi,age,setValue)=>{
+import {database} from "./firebase";
+
+const submit = async (user,pregnancies,glucose,bloodPressure,skinThickness,insulin,bmi,age,setValue)=>{
     const data = {
         pregnancies: pregnancies,
         glucose: glucose,
@@ -22,6 +24,21 @@ const submit = async (pregnancies,glucose,bloodPressure,skinThickness,insulin,bm
     const response = await request.json();
 
     setValue(response);
+
+    await database.collection('users')
+        .doc(user.email)
+        .collection('history')
+        .add({
+            pregnancies,
+            glucose,
+            bloodPressure,
+            skinThickness,
+            insulin,
+            bmi,
+            age,
+            value : response.value,
+            timestamp: new Date().toLocaleString("en-US", {timeZone: "America/New_York"}),
+        })
 
 }
 

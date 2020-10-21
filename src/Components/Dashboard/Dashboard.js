@@ -29,7 +29,7 @@ function Dashboard() {
             {
                 data: [parseFloat(glucose),parseFloat(bloodPressure),parseFloat(insulin),(parseFloat(value?.value) * 100).toFixed(2)],
                 label: "About You",
-                borderColor: "#3e95cd",
+                borderColor: (parseFloat(value?.value) * 100).toFixed(2)<50? "teal": "#FF385Cs",
                 fill: true,
                 lineTension: 0.1
             }
@@ -40,12 +40,12 @@ function Dashboard() {
         if (!user) history.replace('/')
     },[user,history])
 
-    const submitValues = (event)=>{
+    const submitValues =  (event)=>{
         event.preventDefault();
 
-        submit(pregnancies,glucose,bloodPressure,skinThickness,insulin,bmi,age,setValue)
+         submit(user,pregnancies,glucose,bloodPressure,skinThickness,insulin,bmi,age,setValue)
 
-        handleOpen()
+        handleOpen();
     }
 
     useEffect(()=>{

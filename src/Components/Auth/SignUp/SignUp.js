@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import './SignUp.css';
 import {Button} from "@material-ui/core";
-import {auth} from "../../../firebase";
+import {auth, database} from "../../../firebase";
 import {Link, useHistory} from "react-router-dom";
 import {useStateValue} from "../../../StateProvider";
 
@@ -34,8 +34,17 @@ function SignUp() {
                 authUser.user.updateProfile({
                     displayName: username
                 })
+                    .then(res=>{
+                        authUser.user.sendEmailVerification();
 
-                authUser.user.sendEmailVerification();
+                        database.collection('users')
+                            .doc(authUser.user.email)
+                            .set({
+                                email: authUser.user.email,
+                                username: authUser.user.displayName
+                            })
+                    })
+
             })
             .catch(error=>{
                 alert(error.message)
