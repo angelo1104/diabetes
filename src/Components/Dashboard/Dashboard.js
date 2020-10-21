@@ -86,7 +86,7 @@ function Dashboard() {
             <NavBar/>
 
             <div className="dashboard-main">
-                <h3>Find out your glucose score</h3>
+                <h3>Find out your diabetes score</h3>
 
                 <div className="dashboard-form">
                     <form onSubmit={submitValues}>
