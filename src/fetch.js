@@ -11,7 +11,7 @@ const submit = async (user,pregnancies,glucose,bloodPressure,skinThickness,insul
         age: age
     }
 
-    const request = await fetch("https://5000-ea1ae6c0-2b73-44b1-968f-114464ef1a39.ws-us02.gitpod.io/model",
+    const request = await fetch("https://murmuring-escarpment-67105.herokuapp.com/model",
         {
             method: "POST",
             headers: {

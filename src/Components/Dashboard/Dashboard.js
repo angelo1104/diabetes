@@ -8,6 +8,7 @@ import submit from "../../fetch";
 import { Dialog } from "@material-ui/core";
 import {Close} from "@material-ui/icons";
 import {Line} from "react-chartjs-2";
+import {database} from "../../firebase";
 
 function Dashboard() {
     const [{user}] = useStateValue();
@@ -20,8 +21,9 @@ function Dashboard() {
     const [bloodPressure,setBloodPressure] = useState('')
     const [age,setAge] = useState('')
     const [bmi,setBmi] = useState('')
-    const [value,setValue] = useState({});
+    const [value,setValue] = useState('0.05');
     const [open,setOpen] = useState(false);
+    const [message,setMessage] = useState('')
 
     const data = {
         labels: ['Glucose','Blood Pressure','Insulin','Diabetic Value'],
@@ -40,16 +42,103 @@ function Dashboard() {
         if (!user) history.replace('/')
     },[user,history])
 
-    const submitValues =  (event)=>{
+    const submitValues = async (event)=>{
         event.preventDefault();
 
-         submit(user,pregnancies,glucose,bloodPressure,skinThickness,insulin,bmi,age,setValue)
+         await submit(user,pregnancies,glucose,bloodPressure,skinThickness,insulin,bmi,age,setValue)
 
         handleOpen();
     }
 
     useEffect(()=>{
         console.log("This is value",value)
+
+        const intValue = parseFloat(value.value) * 100
+
+        console.log(intValue)
+
+        if (intValue<=10){
+            database.collection('diets')
+                .doc('1')
+                .get()
+                .then(doc=>{
+                    console.log(doc.data())
+                    setMessage(doc.data().message)
+                })
+        }else if (intValue>10 && intValue<=20){
+            database.collection('diets')
+                .doc('2')
+                .get()
+                .then(doc=>{
+                    console.log(doc.data())
+                    setMessage(doc.data().message)
+                })
+        }else if (intValue>20 && intValue<=30){
+            database.collection('diets')
+                .doc('3')
+                .get()
+                .then(doc=>{
+                    console.log(doc.data())
+                    setMessage(doc.data().message)
+                })
+        }else if (intValue>30 && intValue<=40){
+            database.collection('diets')
+                .doc('4')
+                .get()
+                .then(doc=>{
+                    console.log(doc.data())
+                    setMessage(doc.data().message)
+                })
+        }else if (intValue>40 && intValue<=50){
+            database.collection('diets')
+                .doc('5')
+                .get()
+                .then(doc=>{
+                    console.log(doc.data())
+                    setMessage(doc.data().message)
+                })
+        }else if (intValue>50 && intValue<=60){
+            database.collection('diets')
+                .doc('6')
+                .get()
+                .then(doc=>{
+                    console.log(doc.data())
+                    setMessage(doc.data().message)
+                })
+        }else if (intValue>60 && intValue<=70){
+            database.collection('diets')
+                .doc('7')
+                .get()
+                .then(doc=>{
+                    console.log(doc.data())
+                    setMessage(doc.data().message)
+                })
+        }else if (intValue>70 && intValue<=80){
+            database.collection('diets')
+                .doc('8')
+                .get()
+                .then(doc=>{
+                    console.log(doc.data())
+                    setMessage(doc.data().message)
+                })
+        }else if (intValue>80 && intValue<=90){
+            database.collection('diets')
+                .doc('9')
+                .get()
+                .then(doc=>{
+                    console.log(doc.data())
+                    setMessage(doc.data().message)
+                })
+        }else if (intValue>90){
+            database.collection('diets')
+                .doc('10')
+                .get()
+                .then(doc=>{
+                    console.log(doc.data())
+                    setMessage(doc.data().message)
+                })
+        }
+
     },[value])
 
     function handleEnter(event) {
@@ -128,6 +217,7 @@ function Dashboard() {
                         <Close/>
                     </IconButton>
                     <h2>Your diabetes probability is {(parseFloat(value.value) * 100).toFixed(2)}</h2>
+                    <h3>{message}</h3>
                     <div id="chart">
                         <Line data={data}/>
                     </div>
