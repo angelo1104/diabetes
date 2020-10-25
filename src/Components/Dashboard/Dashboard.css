@@ -10,7 +10,7 @@
     font-family: "Montserrat", sans-serif;
     font-weight: 300;
     font-size: 40px;
-    transform: skewY(50deg) ;
+    transform: rotate(89.5deg) ;
     position: relative;
     top: 250px;
     z-index: 2000;

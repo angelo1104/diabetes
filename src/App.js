@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import './App.css';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Home from "./Components/Home/Home";
-import {auth} from "./firebase";
+import {auth, database} from "./firebase";
 import {useStateValue} from "./StateProvider";
 import SignUp from "./Components/Auth/SignUp/SignUp";
 import Login from "./Components/Auth/Login/Login";
@@ -12,7 +12,7 @@ import History from "./Components/History/History";
 function App() {
 
   //eslint-disable-next-line
-  const [state,dispatch] = useStateValue()
+  const [{user,history},dispatch] = useStateValue()
 
   useEffect(()=>{
     auth.onAuthStateChanged(authUser=>{
@@ -29,6 +29,28 @@ function App() {
       }
     })
   },[dispatch])
+
+  useEffect(()=>{
+
+    if (user){
+      database.collection('users')
+          .doc(user?.email)
+          .collection('history')
+          .orderBy('timestamp','desc')
+          .limit(4)
+          .onSnapshot(snapshot => {
+            dispatch({
+              type: 'SET_HISTORY',
+              history: snapshot.docs.map(doc=>{
+                return {
+                  id: doc.id,
+                  ...doc.data(),
+                }
+              })
+            })
+          })
+    }
+  },[user, dispatch])
 
   return (
       <div className="app">

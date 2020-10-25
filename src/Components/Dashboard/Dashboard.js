@@ -11,10 +11,11 @@ import {Line} from "react-chartjs-2";
 import {database} from "../../firebase";
 import Lottie from "lottie-react-web";
 import animation from './paperplanelottie.json'
+import OneChart from "../OneChart/OneChart";
 
 function Dashboard() {
-    const [{user}] = useStateValue();
-    const history = useHistory();
+    const [{user, history}] = useStateValue();
+    const routerHistory = useHistory();
 
     const [pregnancies,setPregnancies] = useState('')
     const [glucose,setGlucose] = useState('')
@@ -43,8 +44,8 @@ function Dashboard() {
     }
 
     useEffect(()=>{
-        if (!user) history.replace('/')
-    },[user,history])
+        if (!user) routerHistory.replace('/')
+    },[user,routerHistory])
 
     const submitValues = async (event)=>{
         event.preventDefault();
@@ -179,7 +180,7 @@ function Dashboard() {
     }
 
     const moveToHistory = (event)=>{
-        history.push('/track-history')
+        routerHistory.push('/track-history')
     }
 
     return (
@@ -197,7 +198,7 @@ function Dashboard() {
                     <form onSubmit={submitValues}>
                         <div className="input">
                             <p>Pregnancies <span>(0 if male)</span></p>
-                            <input onKeyDown={handleEnter} type="text" value={pregnancies} onChange={e=>setPregnancies(e.target.value)}/>
+                            <input autoFocus onKeyDown={handleEnter} type="text" value={pregnancies} onChange={e=>setPregnancies(e.target.value)}/>
                         </div>
                         <div className="input">
                             <p>Glucose</p>
@@ -244,6 +245,7 @@ function Dashboard() {
                     <div id="chart">
                         <Line data={data}/>
                     </div>
+                    <OneChart {...history[1]}/>
                 </Dialog>
             </div>
         </div>
