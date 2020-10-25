@@ -9,6 +9,8 @@ import { Dialog } from "@material-ui/core";
 import {Close} from "@material-ui/icons";
 import {Line} from "react-chartjs-2";
 import {database} from "../../firebase";
+import Lottie from "lottie-react-web";
+import animation from './paperplanelottie.json'
 
 function Dashboard() {
     const [{user}] = useStateValue();
@@ -24,6 +26,8 @@ function Dashboard() {
     const [value,setValue] = useState('0.05');
     const [open,setOpen] = useState(false);
     const [message,setMessage] = useState('')
+
+    const [processing,setProcessing] = useState(false)
 
     const data = {
         labels: ['Glucose','Blood Pressure','Insulin','Diabetic Value'],
@@ -44,6 +48,8 @@ function Dashboard() {
 
     const submitValues = async (event)=>{
         event.preventDefault();
+
+        setProcessing(true)
 
          await submit(user,pregnancies,glucose,bloodPressure,skinThickness,insulin,bmi,age,setValue)
 
@@ -152,6 +158,7 @@ function Dashboard() {
     }
 
     const handleOpen = ()=>{
+        setProcessing(false)
         setOpen(true)
     }
 
@@ -217,7 +224,14 @@ function Dashboard() {
                             <input type="text" value={age} onChange={e=>setAge(e.target.value)}/>
                         </div>
 
-                        <Button type={'submit'} className={'fetch-button'}>Submit</Button>
+                        <Button disabled={processing} type={'submit'} className={'fetch-button'}>
+                            {!processing && 'Submit'}
+                            {
+                                processing && <Lottie options={{
+                                    animationData: animation
+                                }}/>
+                            }
+                        </Button>
 
                     </form>
                 </div>

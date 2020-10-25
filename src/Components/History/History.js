@@ -14,7 +14,7 @@ function History() {
             database.collection('users')
                 .doc(user?.email)
                 .collection('history')
-                .orderBy('timestamp')
+                .orderBy('timestamp','desc')
                 .limit(4)
                 .onSnapshot(snapshot => {
                     dispatch({
