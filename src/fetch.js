@@ -23,7 +23,7 @@ const submit = async (user,pregnancies,glucose,bloodPressure,skinThickness,insul
 
     const response = await request.json();
 
-    setValue(response);
+    await setValue(response);
 
     await database.collection('users')
         .doc(user.email)

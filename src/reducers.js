@@ -1,5 +1,6 @@
 export const initialState = {
     user: null,
+    history:[],
 }
 
 const reducer = (state,action)=>{
@@ -10,6 +11,11 @@ const reducer = (state,action)=>{
             return {
                 ...state,
                 user: action.user
+            }
+        case 'SET_HISTORY':
+            return {
+                ...state,
+                history: action.history
             }
         default:
             return {...state}

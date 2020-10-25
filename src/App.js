@@ -7,6 +7,7 @@ import {useStateValue} from "./StateProvider";
 import SignUp from "./Components/Auth/SignUp/SignUp";
 import Login from "./Components/Auth/Login/Login";
 import Dashboard from "./Components/Dashboard/Dashboard";
+import History from "./Components/History/History";
 
 function App() {
 
@@ -38,6 +39,9 @@ function App() {
             </Route>
             <Route path={'/login'}>
               <Login/>
+            </Route>
+            <Route path={'/track-history'}>
+              <History/>
             </Route>
             <Route path={'/dashboard'}>
               <Dashboard/>

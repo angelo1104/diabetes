@@ -32,7 +32,7 @@ function NavBar() {
                 </a>
             </div>
 
-            {location.pathname!=='/dashboard' && <div className="navbar-auth">
+            {(location.pathname!=='/dashboard' || location.pathname!=='/track-history') && <div className="navbar-auth">
                 <div className="navbar-link">
                     <Link to={'/login'}>
                         Login
@@ -47,6 +47,14 @@ function NavBar() {
 
             {
                 location.pathname === '/dashboard' &&  <div className="navbar-link signup-button">
+                    <p onClick={signOut}>
+                        Sign Out
+                    </p>
+                </div>
+            }
+
+            {
+                location.pathname === '/track-history' &&  <div className="navbar-link signup-button">
                     <p onClick={signOut}>
                         Sign Out
                     </p>

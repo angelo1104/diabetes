@@ -48,6 +48,7 @@ function Dashboard() {
          await submit(user,pregnancies,glucose,bloodPressure,skinThickness,insulin,bmi,age,setValue)
 
         handleOpen();
+
     }
 
     useEffect(()=>{
@@ -170,11 +171,19 @@ function Dashboard() {
         setPregnancies('')
     }
 
+    const moveToHistory = (event)=>{
+        history.push('/track-history')
+    }
+
     return (
         <div className="dashboard">
             <NavBar/>
 
             <div className="dashboard-main">
+                <Button className={'history-button'} onClick={moveToHistory}>
+                    <p className={'track-history-button'}>Track History</p>
+                </Button>
+
                 <h3>Find out your diabetes score</h3>
 
                 <div className="dashboard-form">

@@ -1,0 +1,36 @@
+.one-chart{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.one-chart h3{
+    font-family: "Montserrat", sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    margin: 20px auto;
+}
+
+.all-data{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 30px;
+    grid-row-gap: 8px;
+    margin: 30px auto 20px;
+}
+
+.onechart-message{
+    margin-top: 25px;
+    width: 55% !important;
+}
+
+.all-data p{
+    font-family: "Segoe UI", sans-serif !important;
+    font-size: 18px;
+    margin: 5px;
+}
+
+
+.history-chart{
+    width: 800px;
+}
