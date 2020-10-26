@@ -38,17 +38,17 @@ function NavBar() {
     return (
         <header className="navbar">
             <div className="navbar-link">
-                <a href="#hello">
+                <a href="/#what">
                     What?
                 </a>
             </div>
             <div className="navbar-link">
-                <a href="#hello">
+                <a href="/#why">
                     Why?
                 </a>
             </div>
             <div className="navbar-link">
-                <a href="#hello">
+                <a href="/#how">
                     How?
                 </a>
             </div>
