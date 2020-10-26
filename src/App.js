@@ -31,6 +31,30 @@ function App() {
   },[dispatch])
 
   useEffect(()=>{
+    const lastValue = history[0];
+    if (history[1]){
+      const secondLastValue = history[1];
+      if (parseFloat(lastValue.value) < parseFloat(secondLastValue.value)){
+        dispatch({
+          type: 'SET_TREND',
+          trend: 'There is a improvement in your condition. Hats-off to you.'
+        })
+      }else if (parseFloat(lastValue.value) === parseFloat(secondLastValue.value)){
+        dispatch({
+          type: 'SET_TREND',
+          trend: 'Your condition is same as before. Have you not followed our instructions? Try our diet plan for a healthy life.'
+        })
+      }else {
+        dispatch({
+          type: 'SET_TREND',
+          trend: 'Your condition is worse than last time. Try our diet plan and consult the Doc for more information on your problem.'
+        })
+      }
+    }
+
+  },[history, dispatch])
+
+  useEffect(()=>{
 
     if (user){
       database.collection('users')

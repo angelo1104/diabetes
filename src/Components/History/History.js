@@ -7,7 +7,7 @@ import SuperChart from "../SuperChart/SuperChart";
 
 function History() {
     //eslint-disable-next-line
-    const [{history,user}, dispatch] = useStateValue()
+    const [{history,user, trend}, dispatch] = useStateValue()
 
     const [superHistory, setSuperHistory] = useState([])
 
@@ -32,6 +32,7 @@ function History() {
     return(
         <div className="history">
             <NavBar/>
+            <h3 className={'history-trend'}>{trend}</h3>
             <div className="histories">
                 <SuperChart historyData={superHistory}/>
                 {

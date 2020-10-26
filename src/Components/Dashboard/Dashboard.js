@@ -14,7 +14,7 @@ import animation from './paperplanelottie.json'
 import OneChart from "../OneChart/OneChart";
 
 function Dashboard() {
-    const [{user, history}] = useStateValue();
+    const [{user, history ,trend}] = useStateValue();
     const routerHistory = useHistory();
 
     const [pregnancies,setPregnancies] = useState('')
@@ -242,9 +242,12 @@ function Dashboard() {
                     </IconButton>
                     <h2>Your diabetes probability is {(parseFloat(value.value) * 100).toFixed(2)}</h2>
                     <h3>{message}</h3>
+
                     <div id="chart">
                         <Line data={data}/>
                     </div>
+
+                    <h4 className="dialog-trend">{trend}</h4>
                     <OneChart {...history[1]}/>
                 </Dialog>
             </div>

@@ -1,6 +1,7 @@
 export const initialState = {
     user: null,
     history:[],
+    trend: '',
 }
 
 const reducer = (state,action)=>{
@@ -16,6 +17,11 @@ const reducer = (state,action)=>{
             return {
                 ...state,
                 history: action.history
+            }
+        case 'SET_TREND':
+            return {
+                ...state,
+                trend: action.trend
             }
         default:
             return {...state}
