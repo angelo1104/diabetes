@@ -14,7 +14,6 @@ function OneChart({pregnancies, glucose, bloodPressure, insulin, value, bmi, ski
                 .doc('1')
                 .get()
                  .then(doc=>{
-                     console.log(doc.data())
                      setMessage(doc.data().message)
                  })
         }else if (intValue>10 && intValue<=20){
@@ -22,7 +21,6 @@ function OneChart({pregnancies, glucose, bloodPressure, insulin, value, bmi, ski
                 .doc('2')
                 .get()
                 .then(doc=>{
-                    console.log(doc.data())
                     setMessage(doc.data().message)
                 })
         }else if (intValue>20 && intValue<=30){
@@ -30,7 +28,6 @@ function OneChart({pregnancies, glucose, bloodPressure, insulin, value, bmi, ski
                 .doc('3')
                 .get()
                 .then(doc=>{
-                    console.log(doc.data())
                     setMessage(doc.data().message)
                 })
         }else if (intValue>30 && intValue<=40){
@@ -38,7 +35,6 @@ function OneChart({pregnancies, glucose, bloodPressure, insulin, value, bmi, ski
                 .doc('4')
                 .get()
                 .then(doc=>{
-                    console.log(doc.data())
                     setMessage(doc.data().message)
                 })
         }else if (intValue>40 && intValue<=50){
@@ -46,7 +42,6 @@ function OneChart({pregnancies, glucose, bloodPressure, insulin, value, bmi, ski
                 .doc('5')
                 .get()
                 .then(doc=>{
-                    console.log(doc.data())
                     setMessage(doc.data().message)
                 })
         }else if (intValue>50 && intValue<=60){
@@ -54,7 +49,6 @@ function OneChart({pregnancies, glucose, bloodPressure, insulin, value, bmi, ski
                 .doc('6')
                 .get()
                 .then(doc=>{
-                    console.log(doc.data())
                     setMessage(doc.data().message)
                 })
         }else if (intValue>60 && intValue<=70){
@@ -62,7 +56,6 @@ function OneChart({pregnancies, glucose, bloodPressure, insulin, value, bmi, ski
                 .doc('7')
                 .get()
                 .then(doc=>{
-                    console.log(doc.data())
                     setMessage(doc.data().message)
                 })
         }else if (intValue>70 && intValue<=80){
@@ -70,7 +63,6 @@ function OneChart({pregnancies, glucose, bloodPressure, insulin, value, bmi, ski
                 .doc('8')
                 .get()
                 .then(doc=>{
-                    console.log(doc.data())
                     setMessage(doc.data().message)
                 })
         }else if (intValue>80 && intValue<=90){
@@ -78,7 +70,6 @@ function OneChart({pregnancies, glucose, bloodPressure, insulin, value, bmi, ski
                 .doc('9')
                 .get()
                 .then(doc=>{
-                    console.log(doc.data())
                     setMessage(doc.data().message)
                 })
         }else if (intValue>90){
@@ -86,7 +77,6 @@ function OneChart({pregnancies, glucose, bloodPressure, insulin, value, bmi, ski
                 .doc('10')
                 .get()
                 .then(doc=>{
-                    console.log(doc.data())
                     setMessage(doc.data().message)
                 })
         }
