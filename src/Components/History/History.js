@@ -4,10 +4,16 @@ import NavBar from "../NavBar/NavBar";
 import OneChart from "../OneChart/OneChart";
 import {useStateValue} from "../../StateProvider";
 import SuperChart from "../SuperChart/SuperChart";
+import {useHistory} from 'react-router-dom'
 
 function History() {
     //eslint-disable-next-line
     const [{history,user, trend}, dispatch] = useStateValue()
+    const routerHistory = useHistory()
+
+    useEffect(()=>{
+        if (!user) routerHistory.replace('/')
+    },[user, routerHistory])
 
     const [superHistory, setSuperHistory] = useState([])
 
@@ -28,13 +34,24 @@ function History() {
         setSuperHistory(dataForChart)
     },[history, colors])
 
-
     return(
         <div className="history">
             <NavBar/>
-            <h3 className={'history-trend'}>{trend}</h3>
+            {
+                history.length!==0 && <h3 className={'history-trend'}>{trend}</h3>
+            }
+
+            {
+                history.length === 0 && <h3 className={'history-trend'}>There are no past records.</h3>
+            }
+
             <div className="histories">
-                <SuperChart historyData={superHistory}/>
+                {
+                    history.length!==0 && <SuperChart historyData={superHistory}/>
+                }
+
+
+
                 {
                     history.map(doc=>{
                         return (

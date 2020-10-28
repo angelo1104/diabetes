@@ -123,3 +123,12 @@
     color: grey;
     margin-bottom: 70px;
 }
+
+.error-in-values{
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    color: #FF5A5F;
+    margin-bottom: 25px;
+    margin-top: 10px;
+    margin-left: 15px;
+}

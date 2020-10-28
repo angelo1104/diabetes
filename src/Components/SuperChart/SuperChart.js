@@ -6,7 +6,7 @@ function SuperChart({historyData}) {
     const datasets = historyData.map((doc,index)=>{
 
         return{
-            data: [doc.glucose, doc.bloodPressure, doc.insulin, doc.value],
+            data: [doc.glucose, doc.bloodPressure, doc.value ],
             label: doc.label,
             borderColor: doc.color,
             fill: true,
@@ -15,7 +15,7 @@ function SuperChart({historyData}) {
     })
 
     const data={
-        labels: ['Glucose','Blood Pressure','Insulin','Diabetic Value'],
+        labels: ['Glucose','Blood Pressure','Diabetic Value'],
         datasets: datasets
     }
 

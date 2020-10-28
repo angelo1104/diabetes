@@ -28,13 +28,15 @@ function Dashboard() {
     const [open,setOpen] = useState(false);
     const [message,setMessage] = useState('')
 
+    const [error,setError] = useState('')
+
     const [processing,setProcessing] = useState(false)
 
     const data = {
-        labels: ['Glucose','Blood Pressure','Insulin','Diabetic Value'],
+        labels: ['Glucose','Blood Pressure','Diabetic Value'],
         datasets: [
             {
-                data: [parseFloat(glucose),parseFloat(bloodPressure),parseFloat(insulin),(parseFloat(value?.value) * 100).toFixed(2)],
+                data: [parseFloat(glucose),parseFloat(bloodPressure),(parseFloat(value?.value) * 100).toFixed(2)],
                 label: "About You",
                 borderColor: (parseFloat(value?.value) * 100).toFixed(2)<50? "teal": "#FF385Cs",
                 fill: true,
@@ -50,11 +52,17 @@ function Dashboard() {
     const submitValues = async (event)=>{
         event.preventDefault();
 
-        setProcessing(true)
+        if (parseFloat(glucose) < 1) setError("Glucose can't be less than 1")
+        else if (parseFloat(bloodPressure) < 1) setError("Blood Pressure can't be less than 1")
+        else if (parseFloat(bmi) < 5) setError("BMI can't be less than 1")
+        else if (parseFloat(age) < 1) setError("Age can't be less than 1")
+        else {
+            setProcessing(true)
 
-         await submit(user,pregnancies,glucose,bloodPressure,skinThickness,insulin,bmi,age,setValue)
+            await submit(user,pregnancies,glucose,bloodPressure,skinThickness,insulin,bmi,age,setValue)
 
-        handleOpen();
+            handleOpen();
+        }
 
     }
 
@@ -197,24 +205,12 @@ function Dashboard() {
                 <div className="dashboard-form">
                     <form onSubmit={submitValues}>
                         <div className="input">
-                            <p>Pregnancies <span>(0 if male)</span></p>
-                            <input autoFocus onKeyDown={handleEnter} type="text" value={pregnancies} onChange={e=>setPregnancies(e.target.value)}/>
-                        </div>
-                        <div className="input">
                             <p>Glucose</p>
                             <input onKeyDown={handleEnter} type="text" value={glucose} onChange={e=>setGlucose(e.target.value)}/>
                         </div>
                         <div className="input">
                             <p>BloodPressure</p>
                             <input onKeyDown={handleEnter} type="text" value={bloodPressure} onChange={e=>setBloodPressure(e.target.value)}/>
-                        </div>
-                        <div className="input">
-                            <p>Skin Thickness</p>
-                            <input onKeyDown={handleEnter} type="text" value={skinThickness} onChange={e=>setSkinThickness(e.target.value)}/>
-                        </div>
-                        <div className="input">
-                            <p>Insulin</p>
-                            <input onKeyDown={handleEnter} type="text" value={insulin} onChange={e=>setInsulin(e.target.value)}/>
                         </div>
                         <div className="input">
                             <p>BMI</p>
@@ -224,6 +220,8 @@ function Dashboard() {
                             <p>Age</p>
                             <input type="text" value={age} onChange={e=>setAge(e.target.value)}/>
                         </div>
+
+                        <p className="error-in-values">{error}</p>
 
                         <Button disabled={processing} type={'submit'} className={'fetch-button'}>
                             {!processing && 'Submit'}
@@ -240,15 +238,21 @@ function Dashboard() {
                     <IconButton className={'close-button-dialog'} onClick={handleDialogClose}>
                         <Close/>
                     </IconButton>
-                    <h2>Your diabetes probability is {(parseFloat(value.value) * 100).toFixed(2)}</h2>
+                    <h2>Your diabetes probability is {(parseFloat(value.value) * 100).toFixed(2)} %</h2>
                     <h3>{message}</h3>
 
                     <div id="chart">
                         <Line data={data}/>
                     </div>
 
-                    <h4 className="dialog-trend">{trend}</h4>
-                    <OneChart {...history[1]}/>
+
+                    {
+                        history[1] && <h4 className="dialog-trend">{trend}</h4>
+                    }
+
+                    {
+                        history[1] && <OneChart {...history[1]}/>
+                    }
                 </Dialog>
             </div>
         </div>
